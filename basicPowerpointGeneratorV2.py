@@ -253,3 +253,13 @@ AddDailyNutritionSlide(prs,0.69,0.51,0.63,0.43)
 AddProteinNutritionSlide(prs,0.78,0.18,0.04)
 prs.save('chart-01.pptx')
 
+def getParticipationSlide(presentation, numberOfParticipants, percentageFemale, averageAge)
+    participationSlide = presentation.slide_layouts[1]
+    titleText = "Who Participated?"
+    titleTextFrame.text = titleText
+
+    contentTextFrame.text = """%i Individuals completed fasting biometric screening\nFemale Participants: %i\%\nMale
+    Participants: %i\%\nAverage Age: %i years""" %(numberOfParticipants, percentageFemale, 100 - percentageFemale,
+    averageAge)
+
+    

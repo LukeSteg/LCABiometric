@@ -1,0 +1,18 @@
+#LCABiometric gitignore
+#used to exclude the excel files so that they do not show up in any public reopsitory
+
+*.xlsx
+
+#ignore swap files
+.*.swp
+
+# Compiled source #
+###################
+*.com
+*.class
+*.dll
+*.exe
+*.o
+*.so
+
+
