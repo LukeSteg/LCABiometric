@@ -8,10 +8,12 @@ from pptx.enum.chart import XL_CHART_TYPE
 from pptx.util import Inches,Pt
 from pptx.enum.chart import XL_LEGEND_POSITION
 from pptx.enum.chart import XL_LABEL_POSITION
+from Parser import parse
 
 def parseSlide(slide):
     for shape in slide.shapes:
         if shape.has_text_frame:
+            parse(slide,shape,shape)
             frame = shape.text_frame
             print(frame.text)
             text = frame.text
@@ -22,7 +24,6 @@ def parseSlide(slide):
             print(frame.text)
             print(shape.text_frame.text)
             if (shape.text_frame.text == '#CHART:PREFAB1'):
-                print('HEREHEREHERE')
                 print(shape.text_frame.text)
                 shape.text_frame.clear
                 x, y, cx, cy = Inches(2), Inches(2), Inches(6), Inches(4.5)
@@ -32,7 +33,7 @@ def parseSlide(slide):
 outputFileName = 'exampleOutput.pptx'
 inputTemplateFileName = 'exampleTemplate3.pptx'
 
-copyfile(inputTemplateFileName, outputFileName)
+#copyfile(inputTemplateFileName, outputFileName)
 
 #outputFile = open(outputFileName)
 #prs = Presentation(outputFile)
@@ -78,6 +79,5 @@ slide = prs.slides[2]
 parseSlide(slide)        
 
 prs.save(outputFileName)
-#outputFile.close()
 
 
