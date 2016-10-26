@@ -12,8 +12,6 @@ def generate_pie_chart(slide,shape,tokens):
 
 		arg_dict[tkn_type] = tkn_value
 		
-	pf.reset()
-
 	if('X' in arg_dict):
 		pf.setX(Inches(arg_dict['X']))
 	if('Y' in arg_dict):

@@ -8,10 +8,12 @@ from pptx.enum.chart import XL_CHART_TYPE
 from pptx.util import Inches,Pt
 from pptx.enum.chart import XL_LEGEND_POSITION
 from pptx.enum.chart import XL_LABEL_POSITION
+from Parser import parse
 
 def parseSlide(slide):
     for shape in slide.shapes:
         if shape.has_text_frame:
+            parse(shape)
             frame = shape.text_frame
             print(frame.text)
             text = frame.text
@@ -32,7 +34,7 @@ def parseSlide(slide):
 outputFileName = 'exampleOutput.pptx'
 inputTemplateFileName = 'exampleTemplate3.pptx'
 
-copyfile(inputTemplateFileName, outputFileName)
+#copyfile(inputTemplateFileName, outputFileName)
 
 #outputFile = open(outputFileName)
 #prs = Presentation(outputFile)
