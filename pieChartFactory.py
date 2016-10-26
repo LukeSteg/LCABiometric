@@ -5,16 +5,16 @@ from pptx import Presentation
 from pptx.chart.data import ChartData
 from pptx.enum.chart import XL_CHART_TYPE
 
-class pieChartFactory
-        self.x = None
-        self.y = None
-        self.cx = None
-        self.cy = None 
-        self.outputText = None
-        self.outputShape = None
-        self.shapeRef = None
-        self.slideRef = None
-        self.dataRef = None
+class pieChartFactory:
+    #self.x = None
+    #self.y = None
+    #self.cx = None
+    #self.cy = None 
+    #self.outputText = None
+    #self.outputShape = None
+    #self.shapeRef = None
+    #self.slideRef = None
+    #self.dataRef = None
 
     def __init__ (self, slideRef, shapeRef):
         self.shapeRef = shapeRef
@@ -59,6 +59,4 @@ class pieChartFactory
 
     @staticmethod
     def setCol():
-
-        
-        
+	pass

@@ -13,7 +13,7 @@ from Parser import parse
 def parseSlide(slide):
     for shape in slide.shapes:
         if shape.has_text_frame:
-            parse(shape)
+            parse(slide,shape,shape)
             frame = shape.text_frame
             print(frame.text)
             text = frame.text

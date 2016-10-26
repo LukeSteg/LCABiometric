@@ -3,15 +3,15 @@
 import xlrd
 
 class textFactory:
-        self.x = None
-        self.y = None
-        self.cx = None
-        self.cy = None 
-        self.textRef = None 
-        self.outputText = None
-        self.outputShape = None
-        self.shapeRef = None
-        self.slideRef = None
+    #self.x = None
+    #self.y = None
+    #self.cx = None
+    #self.cy = None 
+    #self.textRef = None 
+    #self.outputText = None
+    #self.outputShape = None
+    #self.shapeRef = None
+    #self.slideRef = None
 
     def __init__ (self, slideRef, shapeRef):
         self.shapeRef = shapeRef
@@ -55,6 +55,5 @@ class textFactory:
 
     @staticmethod
     def setCol():
+	pass
 
-        
-        
