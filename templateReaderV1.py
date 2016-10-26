@@ -24,7 +24,6 @@ def parseSlide(slide):
             print(frame.text)
             print(shape.text_frame.text)
             if (shape.text_frame.text == '#CHART:PREFAB1'):
-                print('HEREHEREHERE')
                 print(shape.text_frame.text)
                 shape.text_frame.clear
                 x, y, cx, cy = Inches(2), Inches(2), Inches(6), Inches(4.5)
@@ -80,6 +79,5 @@ slide = prs.slides[2]
 parseSlide(slide)        
 
 prs.save(outputFileName)
-#outputFile.close()
 
 
