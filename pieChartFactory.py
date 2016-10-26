@@ -1,22 +1,24 @@
 #!/usr/bin/python
 
 import xlrd
+from pptx import Presentation
+from pptx.chart.data import ChartData
+from pptx.enum.chart import XL_CHART_TYPE
 
-class pieChartFactory:
+class pieChartFactory
         self.x = None
         self.y = None
         self.cx = None
         self.cy = None 
-        self.textRef = None 
         self.outputText = None
         self.outputShape = None
         self.shapeRef = None
         self.slideRef = None
+        self.dataRef = None
 
     def __init__ (self, slideRef, shapeRef):
         self.shapeRef = shapeRef
         self.slideRef = slideRef
-        self.shapeRef = inputShape
         self.x = inputShape.top
         self.y = inputShape.left
         self.cx = inputShape.width
@@ -26,17 +28,19 @@ class pieChartFactory:
     def __init__ (self, excelFilesRef):
         self.excelFiles = excelFilesRef
     
-    def generateText():
+    def generatePieChart():
+        self.slideRef.shapes.add_chart(XL_CHART_TYPE.PIE,self.x,self.y,self.cx,self.cy,dataRef)
         return self.outputText
 
     def generateShape():
-        return self.outputShape
+        newShape = self.slideRef.shapes.add_textbox(self.x, self.y, self.cx, self.cy)
+        newShape.text = textRef
 
     def setColumn(colText):
         self.columnNum = colText 
     
-    def setText(textRef):
-        self.contentText = textRef
+    def setData(dataRef):
+        self.dataRef = dataRef
 
     def setShape(shapeRef):
         self.shapeRef =  shapeRef
@@ -55,5 +59,6 @@ class pieChartFactory:
 
     @staticmethod
     def setCol():
+
         
         

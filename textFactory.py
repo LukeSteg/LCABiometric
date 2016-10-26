@@ -16,7 +16,6 @@ class textFactory:
     def __init__ (self, slideRef, shapeRef):
         self.shapeRef = shapeRef
         self.slideRef = slideRef
-        self.shapeRef = inputShape
         self.x = inputShape.top
         self.y = inputShape.left
         self.cx = inputShape.width
