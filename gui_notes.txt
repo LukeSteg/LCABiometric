@@ -1,0 +1,9 @@
+template file
+
+all input excel file(s)
+	grab a directory, list all excel files in it
+	have selectable boxes for each file to include it or not.
+
+output file
+
+run button
