@@ -3,6 +3,7 @@
 import wx
 import os
 import fnmatch
+import templateReaderV3 as trV3
 
 class FileSelectionFrame(wx.Frame):
 	def __init__(self, parent):
@@ -108,7 +109,7 @@ class FileSelectionPanel(wx.Panel):
 			self.EDB_label.SetValue(str(self.excel_dir))
 			self.excel_list_all = {}
 			for filename in os.listdir(self.excel_dir):
-				if fnmatch.fnmatch(filename, '*.xls'):
+				if fnmatch.fnmatch(filename, '*.xlsx'):
 					self.excel_list_all[filename] = False
 			self.Unbind(wx.EVT_CHECKBOX)
 			self.excel_dir_grid = wx.BoxSizer(wx.VERTICAL)
@@ -124,8 +125,8 @@ class FileSelectionPanel(wx.Panel):
 			self.excel_list_all[fname] = box.GetValue()
 		
 	def onRun(self, event):
-		self.excel_list_use = [fname for fname, val in self.excel_list_all.items() if val]
-		print self.excel_list_use
+		self.excel_list_use = [self.excel_dir + os.sep + fname for fname, val in self.excel_list_all.items() if val]
+		trV3.createOutput(self.output_dir + os.sep + self.output_filename, self.template_dir + os.sep + self.template_filename, self.excel_list_use)
 		
 	def askUserForFilename(self, **dialogOptions):
 		dialog = wx.FileDialog(self, **dialogOptions)
