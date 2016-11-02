@@ -7,7 +7,7 @@ import templateReaderV3 as trV3
 
 class FileSelectionFrame(wx.Frame):
 	def __init__(self, parent):
-		super(FileSelectionFrame, self).__init__(None, title = "PowerPoint Generator v0.1", size = (900, 230))
+		super(FileSelectionFrame, self).__init__(None, title = "PowerPoint Generator v0.1", size = (1000, 230))
 
 class FileSelectionPanel(wx.Panel):
 	def __init__(self, parent):
@@ -29,17 +29,17 @@ class FileSelectionPanel(wx.Panel):
 		# get template file
 		self.template_file_button = wx.Button(self, label = "Choose Template Powerpoint File")
 		self.Bind(wx.EVT_BUTTON, self.onTFB, self.template_file_button)
-		self.TFB_label = wx.TextCtrl(self, size=(600,-1), style = wx.TE_READONLY)
+		self.TFB_label = wx.TextCtrl(self, size=(500,-1), style = wx.TE_READONLY)
 		
 		# get output file
 		self.output_file_button = wx.Button(self, label = "Choose Output Filename")
 		self.Bind(wx.EVT_BUTTON, self.onOFB, self.output_file_button)
-		self.OFB_label = wx.TextCtrl(self, size=(600,-1), style = wx.TE_READONLY)
+		self.OFB_label = wx.TextCtrl(self, size=(500,-1), style = wx.TE_READONLY)
 		
 		# get directory of input excel file(s)
 		self.excel_dir_button = wx.Button(self, label = "Choose Directory of Input Excel File(s)")
 		self.Bind(wx.EVT_BUTTON, self.onEDB, self.excel_dir_button)
-		self.EDB_label = wx.TextCtrl(self, size=(600,-1), style = wx.TE_READONLY)
+		self.EDB_label = wx.TextCtrl(self, size=(500,-1), style = wx.TE_READONLY)
 		
 		#TO-DO: add checkboxes foreach excel file in the given directory
 		#so that the user may opt to use some of them, but not all.
