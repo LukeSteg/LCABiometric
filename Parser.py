@@ -1,19 +1,16 @@
 from pptx.util import Inches
 import pieChartFactory
-#import barChartFactory
+import barChartFactory
 import textFactory
 #import lineChartFactory
 
 def generate_pie_chart(slide,shape,tokens,fileRef):
     pf = pieChartFactory.pieChartFactory(slide,shape)
-    print 'HERE GPC'
     arg_dict = {}
     for token in tokens:
         tkn_type = token.split(':')[0]
         tkn_value = token.split(':')[1]
-        print 'token type %s| token value %s'%(tkn_type, tkn_value)
         arg_dict[tkn_type] = tkn_value
-        print 'COLUMN' in arg_dict
         
     if('X' in arg_dict):
         pf.setX(Inches(int(arg_dict['X'])))
@@ -29,37 +26,40 @@ def generate_pie_chart(slide,shape,tokens,fileRef):
     return pf.generateShape()
 
 def generate_bar_chart(slide,shape,tokens,fileRef):
-    #bf = barChartFactory.barChartFactory(slide,shape)
-    #for token in tokens:
-#	arg_dict = {}
-#        tkn_type = token.split(':')[0]
-#        tkn_value = token.split(':')[1]
-#
-#        arg_dict[tkn_type] = tkn_value
-#
-#    if('X' in arg_dict):
-#        bf.setX(Inches(arg_dict['X']))
-#    if('Y' in arg_dict):
-#        bf.setY(Inches(arg_dict['Y']))
-#    if('CX' in arg_dict):
-#        bf.setCX(Inches(arg_dict['CX']))
-#    if('CY' in arg_dict):
-#        bf.setCY(Inches(arg_dict['CY']))
-#    if('CATEGORIES' in arg_dict):
+    bf = barChartFactory.barChartFactory(slide,shape)
+    arg_dict = {}
+    for token in tokens:
+        tkn_type = token.split(':')[0]
+        tkn_value = token.split(':')[1]
+
+        arg_dict[tkn_type] = tkn_value
+
+    if('X' in arg_dict):
+        bf.setX(Inches(int(arg_dict['X'])))
+    if('Y' in arg_dict):
+        bf.setY(Inches(int(arg_dict['Y'])))
+    if('CX' in arg_dict):
+        bf.setCX(Inches(int(arg_dict['CX'])))
+    if('CY' in arg_dict):
+        bf.setCY(Inches(int(arg_dict['CY'])))
+    if('COLUMN' in arg_dict):
+        bf.getDataFromColumn(int(arg_dict['COLUMN']),fileRef)
+    
+#   if('CATEGORIES' in arg_dict):
 #        bf.setCategories(arg_dict['CATEGORIES'])
 #    if('SERIES NAME' in arg_dict and 'SERIES DATA' in arg_dict):
 #        bf.addSeries(arg_dict['SERIES NAME'],arg_dict['SERIES DATA'])
 #    if('HAS LEGEND' in arg_dict):
 #        bf.setCategories(bool(arg_dict['HAS LEGEND']))
-    
-#    return bf.generateShape()
+   
+    return bf.generateShape()
     pass
 
 def generate_line_chart(slide,shape,tokens,fileRef):
     lf = lineChartFactory.lineChartFactory(slide,shape)
 
+    arg_dict = {}
     for token in tokens:
-	arg_dict = {}
         tkn_type = token.split(':')[0]
         tkn_value = token.split(':')[1]
 
@@ -79,8 +79,8 @@ def generate_line_chart(slide,shape,tokens,fileRef):
 def generate_text(slide,shape,tokens,fileRef):
     tf = textFactory.textFactory(slide,shape)
 
+    arg_dict = {}
     for token in tokens:
-	arg_dict = {}
         tkn_type = token.split(':')[0]
         tkn_value = token.split(':')[1]
 

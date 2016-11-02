@@ -3,15 +3,6 @@
 import xlrd
 
 class textFactory:
-    #self.x = None
-    #self.y = None
-    #self.cx = None
-    #self.cy = None 
-    #self.textRef = None 
-    #self.outputText = None
-    #self.outputShape = None
-    #self.shapeRef = None
-    #self.slideRef = None
 
     def __init__ (self, slideRef, shapeRef):
         self.shapeRef = shapeRef
@@ -27,6 +18,8 @@ class textFactory:
 
     def generateShape(self):
         newShape = self.slideRef.shapes.add_textbox(self.x, self.y, self.cx, self.cy)
+        self.shapeRef.text = ''
+        print self.shapeRef.text
         newShape.text = self.contentText
 
     def setColumn(self,colText):
