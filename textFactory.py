@@ -16,44 +16,37 @@ class textFactory:
     def __init__ (self, slideRef, shapeRef):
         self.shapeRef = shapeRef
         self.slideRef = slideRef
-        self.x = inputShape.top
-        self.y = inputShape.left
-        self.cx = inputShape.width
-        self.cy = inputShape.height
+        self.x = shapeRef.top
+        self.y = shapeRef.left
+        self.cx = shapeRef.width
+        self.cy = shapeRef.height
 
-
-    def __init__ (self, excelFilesRef):
-        self.excelFiles = excelFilesRef
     
-    def generateText():
+    def generateText(self):
         return self.outputText
 
-    def generateShape():
+    def generateShape(self):
         newShape = self.slideRef.shapes.add_textbox(self.x, self.y, self.cx, self.cy)
-        newShape.text = textRef
+        newShape.text = self.contentText
 
-    def setColumn(colText):
+    def setColumn(self,colText):
         self.columnNum = colText 
     
-    def setText(textRef):
+    def setText(self, textRef):
         self.contentText = textRef
 
-    def setShape(shapeRef):
+    def setShape(self, shapeRef):
         self.shapeRef =  shapeRef
 
-    def setX(x):
+    def setX(self, x):
         self.x = x 
 
-    def setY(y):
+    def setY(self, y):
         self.y = y 
 
-    def setCX(cx):
+    def setCX(self, cx):
         self.cx = cx 
 
-    def setCY(CY):
+    def setCY(self, CY):
         self.CY = CY
-
-    @staticmethod
-    def setCol():
-	pass
 
