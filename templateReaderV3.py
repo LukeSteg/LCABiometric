@@ -10,10 +10,10 @@ from pptx.enum.chart import XL_LEGEND_POSITION
 from pptx.enum.chart import XL_LABEL_POSITION
 from Parser import parse
 
-def parseSlide(slide):
+def parseSlide(slide,slideRef):
     for shape in slide.shapes:
         if shape.has_text_frame:
-            parse(slide,shape,shape)
+            parse(slide,shape,shape,slideRef)
             
 def createOutput(outputFileName, inputTemplateFileName, DataSheetList):
 #	outputFileName = 'exampleOutput.pptx'
@@ -24,7 +24,9 @@ def createOutput(outputFileName, inputTemplateFileName, DataSheetList):
 	slide = prs.slides[0]
 
 	slide = prs.slides[1]
-	parseSlide(slide)
+	
+	#TODO fix temporary measure
+	parseSlide(slide,DataSheetList[0])
 
 
 #	book = xlrd.open_workbook("ExampleDataset.xlsx")
@@ -49,8 +51,10 @@ def createOutput(outputFileName, inputTemplateFileName, DataSheetList):
 		chart_data.categories = ['Goal','Less than Goal']
 		chart_data.add_series('Series 1',(percentageAtGoal, percentageNotAtGoal))
 
+
+	#TODO fix temporary measure
 	slide = prs.slides[2]
-	parseSlide(slide)        
+	parseSlide(slide,DataSheetList[0])        
 
 	prs.save(outputFileName)
 

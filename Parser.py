@@ -4,7 +4,7 @@ import pieChartFactory
 import textFactory
 #import lineChartFactory
 
-def generate_pie_chart(slide,shape,tokens):
+def generate_pie_chart(slide,shape,tokens,fileRef):
     pf = pieChartFactory.pieChartFactory(slide,shape)
 
     for token in tokens:
@@ -22,16 +22,12 @@ def generate_pie_chart(slide,shape,tokens):
         pf.setCX(Inches(arg_dict['CX']))
     if('CY' in arg_dict):
         pf.setCY(Inches(arg_dict['CY']))
-    if('CATEGORIES' in arg_dict):
-        pf.setCategories(arg_dict['CATEGORIES'])
-    if('SERIES NAME' in arg_dict and 'SERIES DATA' in arg_dict):
-        pf.addSeries(arg_dict['SERIES NAME'],arg_dict['SERIES DATA'])
-    if('HAS LEGEND' in arg_dict):
-        pf.setCategories(bool(arg_dict['HAS LEGEND']))
+    if('COLUMN' in arg_dict):
+        pf.getDataFromColumn(arg_dict['COLUMN'],fileRef)
     
     return pf.generateShape()
 
-def generate_bar_chart(slide,shape,tokens):
+def generate_bar_chart(slide,shape,tokens,fileRef):
     bf = barChartFactory.barChartFactory(slide,shape)
     for token in tokens:
 	arg_dict = {}
@@ -57,7 +53,7 @@ def generate_bar_chart(slide,shape,tokens):
     
     return bf.generateShape()
 
-def generate_line_chart(slide,shape,tokens):
+def generate_line_chart(slide,shape,tokens,fileRef):
     lf = lineChartFactory.lineChartFactory(slide,shape)
 
     for token in tokens:
@@ -78,7 +74,7 @@ def generate_line_chart(slide,shape,tokens):
     
     return lf.generateShape()
 
-def generate_text(slide,shape,tokens):
+def generate_text(slide,shape,tokens,fileRef):
     tf = textFactory.textFactory(slide,shape)
 
     for token in tokens:
@@ -103,7 +99,7 @@ def generate_text(slide,shape,tokens):
     return tf.generateShape()
 
 
-def parse(slide,shape0,shape):
+def parse(slide,shape0,shape,fileRef):
     frame = shape.text_frame
     
     text = frame.text.strip();
@@ -123,6 +119,6 @@ def parse(slide,shape0,shape):
 
         switch = {'PIE CHART':generate_pie_chart , 'BAR CHART':generate_bar_chart , 'LINE CHART':generate_line_chart , 'TEXT':generate_text }
     
-        new_shape = switch[fig_type](slide,shape0,tokens)
+        new_shape = switch[fig_type](slide,shape0,tokens,fileRef)
 
 
