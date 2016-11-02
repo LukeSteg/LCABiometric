@@ -19,36 +19,36 @@ class pieChartFactory:
     def __init__ (self, excelFilesRef):
         self.excelFiles = excelFilesRef
     
-    def generatePieChart():
+    def generatePieChart(self):
         self.slideRef.shapes.add_chart(XL_CHART_TYPE.PIE,self.x,self.y,self.cx,self.cy,self.chart_data)
         return self.outputText
 
-    def generateShape():
+    def generateShape(self):
         newShape = self.slideRef.shapes.add_textbox(self.x, self.y, self.cx, self.cy)
         newShape.text = textRef
 
-    def setColumn(colText):
+    def setColumn(self, colText):
         self.columnNum = colText 
     
-    def setData(dataRef):
+    def setData(self, dataRef):
         self.dataRef = dataRef
 
-    def setShape(shapeRef):
+    def setShape(self, shapeRef):
         self.shapeRef =  shapeRef
 
-    def setX(x):
+    def setX(self, x):
         self.x = x 
 
-    def setY(y):
+    def setY(self, y):
         self.y = y 
 
-    def setCX(cx):
+    def setCX(self, cx):
         self.cx = cx 
 
-    def setCY(CY):
+    def setCY(self, CY):
         self.CY = CY
 
-    def getDataFromColumn(colNum, fileRef):
+    def getDataFromColumn(self, colNum, fileRef):
         book = xlrd.open_workbook(fileRef);
         dataSheet = book.sheet_by_index(25)
         self.chart_data = ChartData()
@@ -58,12 +58,12 @@ class pieChartFactory:
         categoryCount = []
 
         for i in range(aggregatedSheet.nrows - 1):
-            rawData.append(aggregatedSheet.cell_value(rowx = i + 1, colx = colNum) 
+            rawData.append(aggregatedSheet.cell_value(rowx = i + 1, colx = colNum))
 
-        catagories = list(set(rawData))
+        categories = list(set(rawData))
 
-        for(i in range(0:len(catagories)):
-            categoryCount.append(dataEntry == categories[i] for dataEntry in rawData))
+        for i in range(len(categories)):
+            categoryCount.append(dataEntry == categories[i] for dataEntry in rawData)
             
         self.chart_data.categories = categories
         self.chart_data.addSeries('Series 1',tuple(categoryCount)) 

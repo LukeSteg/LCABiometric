@@ -127,6 +127,7 @@ class FileSelectionPanel(wx.Panel):
 	def onRun(self, event):
 		self.excel_list_use = [self.excel_dir + os.sep + fname for fname, val in self.excel_list_all.items() if val]
 		trV3.createOutput(self.output_dir + os.sep + self.output_filename, self.template_dir + os.sep + self.template_filename, self.excel_list_use)
+		raise SystemExit
 		
 	def askUserForFilename(self, **dialogOptions):
 		dialog = wx.FileDialog(self, **dialogOptions)
