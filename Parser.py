@@ -99,12 +99,17 @@ def generate_text(slide,shape,tokens):
 
 def parse(slide,shape0,shape):
     frame = shape.text_frame
-    print "parsing %s" % frame.text    
     
     text = frame.text.strip();
-    if( text[0:1] == '#{' and text[-1]=='}' ):
+    print "parsing %s" % text    
+    print "text[0:1] == %s" % text[0:1]
+    print "text[-1] == %s" % text[-1]
+    if( text[0:2] == '#{' and text[-1]=='}' ):
         text = text[2:-1]
         tokens = text.split(',');
+        print type(tokens[0]);
+        tokens = map(str,tokens)
+        print type(tokens[0]);
         tokens = map(str.strip,tokens);
         tokens = map(str.upper,tokens);
         
