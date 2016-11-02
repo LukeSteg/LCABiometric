@@ -2,6 +2,7 @@
 #used to exclude the excel files so that they do not show up in any public reopsitory
 
 *.xlsx
+*.pptx
 
 #ignore swap files
 .*.swp
@@ -18,3 +19,9 @@
 *.pyc
 
 .~lock.*
+
+#temp files
+*~
+
+#zane files
+*.wasd
