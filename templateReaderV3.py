@@ -16,45 +16,11 @@ def parseSlide(slide,slideRef):
             parse(slide,shape,shape,slideRef)
             
 def createOutput(outputFileName, inputTemplateFileName, DataSheetList):
-#	outputFileName = 'exampleOutput.pptx'
-#	inputTemplateFileName = 'exampleTemplate4.pptx'
 
 	prs = Presentation(inputTemplateFileName)
 
-	slide = prs.slides[0]
-
-	slide = prs.slides[1]
-	
-	#TODO fix temporary measure
-	parseSlide(slide,DataSheetList[0])
-
-
-#	book = xlrd.open_workbook("ExampleDataset.xlsx")
-	book = xlrd.open_workbook(DataSheetList[0])
-	aggregatedSheet = book.sheet_by_index(25)
-	chart_data = ChartData()
-	chart_data.categories = ['East', 'West', 'Midwest']
-	chart_data.add_series('Series 1', (19.2, 21.4, 16.7))
-
-	peopleAtGoal = 0
-	peopleNotAtGoal = 0
-	numberOfPeople = 0
-	for i in range(aggregatedSheet.nrows - 1):
-	    numberOfPeople += 1
-	    if( aggregatedSheet.cell_value(rowx = i + 1, colx = 5) == "Goal"):
-		peopleAtGoal += 1;
-	    else:
-		peopleNotAtGoal += 1
-		percentageAtGoal = 100*(float(peopleAtGoal)/numberOfPeople)
-		percentageNotAtGoal = 100*(float(peopleNotAtGoal)/numberOfPeople)
-		chart_data = ChartData()
-		chart_data.categories = ['Goal','Less than Goal']
-		chart_data.add_series('Series 1',(percentageAtGoal, percentageNotAtGoal))
-
-
-	#TODO fix temporary measure
-	slide = prs.slides[2]
-	parseSlide(slide,DataSheetList[0])        
+        for slide in prs.slides:
+            parseSlide(slide, DataSheetList[0])
 
 	prs.save(outputFileName)
 

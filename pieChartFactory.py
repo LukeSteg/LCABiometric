@@ -10,22 +10,19 @@ class pieChartFactory:
     def __init__ (self, slideRef, shapeRef):
         self.shapeRef = shapeRef
         self.slideRef = slideRef
-        self.x = inputShape.top
-        self.y = inputShape.left
-        self.cx = inputShape.width
-        self.cy = inputShape.height
+        self.x = shapeRef.top
+        self.y = shapeRef.left
+        self.cx = shapeRef.width
+        self.cy = shapeRef.height
 
-
-    def __init__ (self, excelFilesRef):
-        self.excelFiles = excelFilesRef
-    
-    def generatePieChart(self):
-        self.slideRef.shapes.add_chart(XL_CHART_TYPE.PIE,self.x,self.y,self.cx,self.cy,self.chart_data)
-        return self.outputText
 
     def generateShape(self):
-        newShape = self.slideRef.shapes.add_textbox(self.x, self.y, self.cx, self.cy)
-        newShape.text = textRef
+        print self.x
+        print self.y
+        print self.cx
+        print self.cy
+        print self.chart_data
+        newShape = self.slideRef.shapes.add_chart(XL_CHART_TYPE.PIE,self.x,self.y,self.cx,self.cy,self.chart_data).chart
 
     def setColumn(self, colText):
         self.columnNum = colText 
@@ -45,27 +42,30 @@ class pieChartFactory:
     def setCX(self, cx):
         self.cx = cx 
 
-    def setCY(self, CY):
-        self.CY = CY
+    def setCY(self, cy):
+        self.cy = cy 
 
     def getDataFromColumn(self, colNum, fileRef):
         book = xlrd.open_workbook(fileRef);
         dataSheet = book.sheet_by_index(25)
         self.chart_data = ChartData()
-
         rawData = []
         categories = []
         categoryCount = []
 
-        for i in range(aggregatedSheet.nrows - 1):
-            rawData.append(aggregatedSheet.cell_value(rowx = i + 1, colx = colNum))
+        for i in range(dataSheet.nrows - 1):
+            rawData.append(dataSheet.cell_value(rowx = i + 1, colx = colNum))
 
         categories = list(set(rawData))
 
         for i in range(len(categories)):
-            categoryCount.append(dataEntry == categories[i] for dataEntry in rawData)
+            categoryCount.append(sum(dataEntry == categories[i] for dataEntry in rawData))
             
+        print "categories : "
+        print categories
+        print "tuple(categorCount) : "
+        print tuple(categoryCount)
         self.chart_data.categories = categories
-        self.chart_data.addSeries('Series 1',tuple(categoryCount)) 
+        self.chart_data.add_series('Series 1',tuple(categoryCount)) 
 
 
