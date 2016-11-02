@@ -6,7 +6,9 @@ import textFactory
 
 def generate_pie_chart(slide,shape,tokens):
     pf = pieChartFactory.pieChartFactory(slide,shape)
+
     for token in tokens:
+	arg_dict = {}
         tkn_type = token.split(':')[0]
         tkn_value = token.split(':')[1]
 
@@ -32,6 +34,7 @@ def generate_pie_chart(slide,shape,tokens):
 def generate_bar_chart(slide,shape,tokens):
     bf = barChartFactory.barChartFactory(slide,shape)
     for token in tokens:
+	arg_dict = {}
         tkn_type = token.split(':')[0]
         tkn_value = token.split(':')[1]
 
@@ -58,6 +61,7 @@ def generate_line_chart(slide,shape,tokens):
     lf = lineChartFactory.lineChartFactory(slide,shape)
 
     for token in tokens:
+	arg_dict = {}
         tkn_type = token.split(':')[0]
         tkn_value = token.split(':')[1]
 
@@ -78,6 +82,7 @@ def generate_text(slide,shape,tokens):
     tf = textFactory.textFactory(slide,shape)
 
     for token in tokens:
+	arg_dict = {}
         tkn_type = token.split(':')[0]
         tkn_value = token.split(':')[1]
 
@@ -92,6 +97,7 @@ def generate_text(slide,shape,tokens):
     if('CY' in arg_dict):
         tf.setCY(Inches(arg_dict['CY']))
     if('TEXT' in arg_dict):
+	print arg_dict['TEXT']
         tf.setText(arg_dict['TEXT'])
     
     return tf.generateShape()
