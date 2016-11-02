@@ -6,15 +6,6 @@ from pptx.chart.data import ChartData
 from pptx.enum.chart import XL_CHART_TYPE
 
 class pieChartFactory:
-    #self.x = None
-    #self.y = None
-    #self.cx = None
-    #self.cy = None 
-    #self.outputText = None
-    #self.outputShape = None
-    #self.shapeRef = None
-    #self.slideRef = None
-    #self.dataRef = None
 
     def __init__ (self, slideRef, shapeRef):
         self.shapeRef = shapeRef
@@ -29,7 +20,7 @@ class pieChartFactory:
         self.excelFiles = excelFilesRef
     
     def generatePieChart():
-        self.slideRef.shapes.add_chart(XL_CHART_TYPE.PIE,self.x,self.y,self.cx,self.cy,dataRef)
+        self.slideRef.shapes.add_chart(XL_CHART_TYPE.PIE,self.x,self.y,self.cx,self.cy,self.chart_data)
         return self.outputText
 
     def generateShape():
@@ -57,6 +48,24 @@ class pieChartFactory:
     def setCY(CY):
         self.CY = CY
 
-    @staticmethod
-    def setCol():
-	pass
+    def getDataFromColumn(colNum, fileRef):
+        book = xlrd.open_workbook(fileRef);
+        dataSheet = book.sheet_by_index(25)
+        self.chart_data = ChartData()
+
+        rawData = []
+        categories = []
+        categoryCount = []
+
+        for i in range(aggregatedSheet.nrows - 1):
+            rawData.append(aggregatedSheet.cell_value(rowx = i + 1, colx = colNum) 
+
+        catagories = list(set(rawData))
+
+        for(i in range(0:len(catagories)):
+            categoryCount.append(dataEntry == categories[i] for dataEntry in rawData))
+            
+        self.chart_data.categories = categories
+        self.chart_data.addSeries('Series 1',tuple(categoryCount)) 
+
+
