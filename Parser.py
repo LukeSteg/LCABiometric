@@ -108,7 +108,7 @@ def parse(slide,shape0,shape,fileRef):
     print "parsing %s" % text    
     print "text[0:1] == %s" % text[0:1]
     print "text[-1] == %s" % text[-1]
-    if( text[0:2] == '#{' and text[-1]=='}' ):
+    if(containsQueryString(text)):
         text = text[2:-1]
         tokens = text.split(',');
         print type(tokens[0]);
@@ -123,4 +123,10 @@ def parse(slide,shape0,shape,fileRef):
          
         new_shape = switch[fig_type](slide,shape0,tokens,fileRef)
 
+def containsQueryString(text):
+    result = False
+    if(('#{' in text) and ('}' in text)):
+        if(text.index('#{') < text.index('}')):
+            result = True
+    return result
 
