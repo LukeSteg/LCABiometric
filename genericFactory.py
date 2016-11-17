@@ -2,6 +2,8 @@
 
 import xlrd
 
+DATA_SHEET_NUM = 25
+
 class genericFactory:
 
     def __init__ (self, slideRef, shapeRef):

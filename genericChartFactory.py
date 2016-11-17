@@ -2,6 +2,7 @@
  
 import xlrd
 from genericFactory import genericFactory
+from genericFactory import DATA_SHEET_NUM
 from pptx import Presentation
 from pptx.chart.data import ChartData
 from pptx.enum.chart import XL_CHART_TYPE
@@ -21,7 +22,7 @@ class genericChartFactory(genericFactory):
 
     def getDataFromColumn(self, colNum, fileRef):
         book = xlrd.open_workbook(fileRef);
-        dataSheet = book.sheet_by_index(25)
+        dataSheet = book.sheet_by_index(DATA_SHEET_NUM)
         self.chart_data = ChartData()
         rawData = []
         categories = []
