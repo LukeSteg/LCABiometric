@@ -2,7 +2,9 @@
 #used to exclude the excel files so that they do not show up in any public reopsitory
 
 *.xlsx
+*.xls
 *.pptx
+*.ppt
 
 #ignore swap files
 .*.swp

@@ -2,7 +2,7 @@
 
 import xlrd
 
-class genericFactory:
+class genericFactory(object):
 
     def __init__ (self, slideRef, shapeRef):
         self.shapeRef = shapeRef
