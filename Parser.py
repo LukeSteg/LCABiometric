@@ -13,13 +13,13 @@ def generate_pie_chart(slide,shape,tokens,fileRef):
         arg_dict[tkn_type] = tkn_value
         
     if('X' in arg_dict):
-        pf.setX(Inches(int(arg_dict['X'])))
+        pf.setX(Inches(float(arg_dict['X'])))
     if('Y' in arg_dict):
-        pf.setY(Inches(int(arg_dict['Y'])))
+        pf.setY(Inches(float(arg_dict['Y'])))
     if('CX' in arg_dict):
-        pf.setCX(Inches(int(arg_dict['CX'])))
+        pf.setCX(Inches(float(arg_dict['CX'])))
     if('CY' in arg_dict):
-        pf.setCY(Inches(int(arg_dict['CY'])))
+        pf.setCY(Inches(float(arg_dict['CY'])))
     if('COLUMN' in arg_dict):
         pf.getDataFromColumn(int(arg_dict['COLUMN']),fileRef)
     
@@ -35,13 +35,13 @@ def generate_bar_chart(slide,shape,tokens,fileRef):
         arg_dict[tkn_type] = tkn_value
 
     if('X' in arg_dict):
-        bf.setX(Inches(int(arg_dict['X'])))
+        bf.setX(Inches(float(arg_dict['X'])))
     if('Y' in arg_dict):
-        bf.setY(Inches(int(arg_dict['Y'])))
+        bf.setY(Inches(float(arg_dict['Y'])))
     if('CX' in arg_dict):
-        bf.setCX(Inches(int(arg_dict['CX'])))
+        bf.setCX(Inches(float(arg_dict['CX'])))
     if('CY' in arg_dict):
-        bf.setCY(Inches(int(arg_dict['CY'])))
+        bf.setCY(Inches(float(arg_dict['CY'])))
     if('COLUMN' in arg_dict):
         bf.getDataFromColumn(int(arg_dict['COLUMN']),fileRef)
     
@@ -66,13 +66,13 @@ def generate_line_chart(slide,shape,tokens,fileRef):
         arg_dict[tkn_type] = tkn_value
         
     if('X' in arg_dict):
-        lf.setX(Inches(int(arg_dict['X'])))
+        lf.setX(Inches(float(arg_dict['X'])))
     if('Y' in arg_dict):
-        lf.setY(Inches(int(arg_dict['Y'])))
+        lf.setY(Inches(float(arg_dict['Y'])))
     if('CX' in arg_dict):
-        lf.setCX(Inches(int(arg_dict['CX'])))
+        lf.setCX(Inches(float(arg_dict['CX'])))
     if('CY' in arg_dict):
-        lf.setCY(Inches(int(arg_dict['CY'])))
+        lf.setCY(Inches(float(arg_dict['CY'])))
     
     return lf.generateShape()
 
@@ -87,13 +87,13 @@ def generate_text(slide,shape,tokens,fileRef):
         arg_dict[tkn_type] = tkn_value
         
     if('X' in arg_dict):
-        tf.setX(Inches(int(arg_dict['X'])))
+        tf.setX(Inches(float(arg_dict['X'])))
     if('Y' in arg_dict):
-        tf.setY(Inches(int(arg_dict['Y'])))
+        tf.setY(Inches(float(arg_dict['Y'])))
     if('CX' in arg_dict):
-        tf.setCX(Inches(int(arg_dict['CX'])))
+        tf.setCX(Inches(float(arg_dict['CX'])))
     if('CY' in arg_dict):
-        tf.setCY(Inches(int(arg_dict['CY'])))
+        tf.setCY(Inches(float(arg_dict['CY'])))
     if('TEXT' in arg_dict):
 	print arg_dict['TEXT']
         tf.setText(arg_dict['TEXT'])
