@@ -4,7 +4,7 @@ import xlrd
 
 DATA_SHEET_NUM = 25
 
-class genericFactory:
+class genericFactory(object):
 
     def __init__ (self, slideRef, shapeRef):
         self.shapeRef = shapeRef
@@ -13,7 +13,7 @@ class genericFactory:
         self.y = shapeRef.left
         self.cx = shapeRef.width
         self.cy = shapeRef.height
-
+        self.relYear = 0
 
     def generateShape(self):
         print "generic generate shape invoked" 
