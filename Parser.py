@@ -94,9 +94,10 @@ def generate_text(slide,shape,tokens,fileRef):
         tf.setCX(Inches(float(arg_dict['CX'])))
     if('CY' in arg_dict):
         tf.setCY(Inches(float(arg_dict['CY'])))
-    if('TEXT' in arg_dict):
-	print arg_dict['TEXT']
-        tf.setText(arg_dict['TEXT'])
+    if('COLUMN' in arg_dict):
+        tf.getDataFromColumn(int(arg_dict['COLUMN']),fileRef)
+    if('VARIABLE' in arg_dict):
+        tf.computeOutputVar(arg_dict['VARIABLE'])
     
     return tf.generateShape()
 
@@ -106,10 +107,9 @@ def parse(slide,shape0,shape,fileRef):
     
     text = frame.text.strip();
     print "parsing %s" % text    
-    print "text[0:1] == %s" % text[0:1]
-    print "text[-1] == %s" % text[-1]
     if(containsQueryString(text)):
-        text = text[2:-1]
+        text = getQueryString(text)
+        print 'Query String ' + text
         tokens = text.split(',');
         print type(tokens[0]);
         tokens = map(str,tokens)
@@ -129,4 +129,14 @@ def containsQueryString(text):
         if(text.index('#{') < text.index('}')):
             result = True
     return result
+
+def getQueryString(text):
+    #modify to create multiple query strings?
+    if(('#{' in text) and ('}' in text)):
+        startIndex = text.index('#{')
+        endIndex = text.index('}')
+        return text[startIndex+2:endIndex]
+    else:
+        print 'WARNING query string not found when possibly expected'
+        return ''
 
