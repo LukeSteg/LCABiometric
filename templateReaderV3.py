@@ -15,12 +15,16 @@ def parseSlide(slide,slideRef):
         if shape.has_text_frame:
             parse(slide,shape,shape,slideRef)
             
-def createOutput(outputFileName, inputTemplateFileName, DataSheetList):
+def createOutput(outputFileName, inputTemplateFileName, DataSheetDict):
 
 	prs = Presentation(inputTemplateFileName)
-
-        for slide in prs.slides:
-            parseSlide(slide, DataSheetList[0])
+	
+	if len(DataSheetDict) == 1:		
+		fname = DataSheetDict.keys()[0]
+		for slide in prs.slides:
+			parseSlide(slide, fname)
+	else:
+		pass # handle multiple data files	
 
 	prs.save(outputFileName)
 
