@@ -1,8 +1,11 @@
 #!/usr/bin/python
-
+import datetime
 import xlrd
 
 DATA_SHEET_NUM = 25
+
+def most_recent_key(tup):
+    return str(tup[1]) + str(tup[0])
 
 class genericFactory(object):
 
@@ -13,7 +16,14 @@ class genericFactory(object):
         self.y = shapeRef.left
         self.cx = shapeRef.width
         self.cy = shapeRef.height
-        self.relYear = 0
+        self.relBook = 0
+        
+    def setBook(self, yr):
+        self.relYear = yr
+        
+    def getFileFromDict(self, fileDict):
+        sortedFiles = sorted(fileDict, key = lambda x: most_recent_key(fileDict[x]), reverse = True)
+        return sortedFiles[self.relBook]      
 
     def generateShape(self):
         print "generic generate shape invoked" 
