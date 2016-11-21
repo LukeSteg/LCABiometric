@@ -22,15 +22,6 @@ class genericFactory(object):
         
     def getFileFromDict(self, fileDict):
         sortedFiles = sorted(fileDict, key = lambda x: most_recent_key(fileDict[x]), reverse = True)
-        tempDict = {}
-        for f in fileDict:
-            fileDict[f]
-            most_recent_key(fileDict[f])
-            tempDict[most_recent_key(fileDict[f])] = f    
-        
-        #sortedFiles = sorted(tempDict)
-        print 'relbk ',self.relBook
-        print 'stdf', sortedFiles
         return sortedFiles[self.relBook]      
 
     def generateShape(self):

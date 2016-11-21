@@ -18,6 +18,7 @@ class lineChartFactory(genericChartFactory):
     def generateShape(self):
         print 'line chart data', self.chart_data
         chart = self.slideRef.shapes.add_chart(XL_CHART_TYPE.LINE,self.x,self.y,self.cx,self.cy,self.chart_data).chart
+        self.shapeRef.text = ''
         chart.has_legend = True
         chart.legend.include_in_layout = False
     
@@ -29,11 +30,13 @@ class lineChartFactory(genericChartFactory):
         readColumnText = sheet.cell_value(rowx = 0, colx = columnNumber)
         while((readColumnText.strip().upper() != columnName) and (readColumnText != '')):
             print readColumnText
-            readColumnText = sheet.cell_value(rowx = 0, colx = columnNumber)
             columnNumber += 1
+            readColumnText = sheet.cell_value(rowx = 0, colx = columnNumber)
 
         if readColumnText == '':
             print 'WARNING, column title: ', readColumnText,  ' not found'
+
+        print 'colnum ',columnNumber ,' readColumnText ', readColumnText
 
         return columnNumber
 
