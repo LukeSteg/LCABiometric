@@ -2,7 +2,7 @@ from pptx.util import Inches
 import pieChartFactory
 import barChartFactory
 import textFactory
-#import lineChartFactory
+import lineChartFactory
 
 def generate_pie_chart(slide,shape,tokens,fileDict):
     pf = pieChartFactory.pieChartFactory(slide,shape)
@@ -12,19 +12,9 @@ def generate_pie_chart(slide,shape,tokens,fileDict):
         tkn_value = token.split(':')[1]
         arg_dict[tkn_type] = tkn_value
         
-    if('X' in arg_dict):
-        pf.setX(Inches(float(arg_dict['X'])))
-    if('Y' in arg_dict):
-        pf.setY(Inches(float(arg_dict['Y'])))
-    if('CX' in arg_dict):
-        pf.setCX(Inches(float(arg_dict['CX'])))
-    if('CY' in arg_dict):
-        pf.setCY(Inches(float(arg_dict['CY'])))
-    if 'BOOK' in arg_dict:
-    	pf.setBook(int(arg_dict['BOOK']))
+    defaultFactoryActions(pf, arg_dict, fileDict);    
     if('COLUMN' in arg_dict):
         pf.getDataFromColumn(int(arg_dict['COLUMN']),pf.getFileFromDict(fileDict))
-    
     return pf.generateShape()
 
 def generate_bar_chart(slide,shape,tokens,fileDict):
@@ -36,19 +26,6 @@ def generate_bar_chart(slide,shape,tokens,fileDict):
 
         arg_dict[tkn_type] = tkn_value
 
-    if('X' in arg_dict):
-        bf.setX(Inches(float(arg_dict['X'])))
-    if('Y' in arg_dict):
-        bf.setY(Inches(float(arg_dict['Y'])))
-    if('CX' in arg_dict):
-        bf.setCX(Inches(float(arg_dict['CX'])))
-    if('CY' in arg_dict):
-        bf.setCY(Inches(float(arg_dict['CY'])))
-    if 'BOOK' in arg_dict:
-    	bf.setBook(int(arg_dict['BOOK']))
-    if('COLUMN' in arg_dict):
-        bf.getDataFromColumn(int(arg_dict['COLUMN']),bf.getFileFromDict(fileDict))
-    
 #   if('CATEGORIES' in arg_dict):
 #        bf.setCategories(arg_dict['CATEGORIES'])
 #    if('SERIES NAME' in arg_dict and 'SERIES DATA' in arg_dict):
@@ -56,8 +33,10 @@ def generate_bar_chart(slide,shape,tokens,fileDict):
 #    if('HAS LEGEND' in arg_dict):
 #        bf.setCategories(bool(arg_dict['HAS LEGEND']))
    
+    defaultFactoryActions(bf, arg_dict, fileDict);    
+    if('COLUMN' in arg_dict):
+        bf.getDataFromColumn(int(arg_dict['COLUMN']),bf.getFileFromDict(fileDict))
     return bf.generateShape()
-    pass
 
 def generate_line_chart(slide,shape,tokens,fileDict):
     lf = lineChartFactory.lineChartFactory(slide,shape)
@@ -68,18 +47,18 @@ def generate_line_chart(slide,shape,tokens,fileDict):
         tkn_value = token.split(':')[1]
 
         arg_dict[tkn_type] = tkn_value
-        
-    if('X' in arg_dict):
-        lf.setX(Inches(float(arg_dict['X'])))
-    if('Y' in arg_dict):
-        lf.setY(Inches(float(arg_dict['Y'])))
-    if('CX' in arg_dict):
-        lf.setCX(Inches(float(arg_dict['CX'])))
-    if('CY' in arg_dict):
-        lf.setCY(Inches(float(arg_dict['CY'])))
-    if 'BOOK' in arg_dict:
-    	lf.setBook(int(arg_dict['BOOK']))
     
+    #MUST GO FIRST
+    if('SURVEYCOUNT' in arg_dict):
+        lf.setNumberOfBooks(int(arg_dict['SURVEYCOUNT']))
+    
+    defaultFactoryActions(lf, arg_dict, fileDict);   
+    if('COLUMN' in arg_dict):
+        lf.getDataFromColumn(int(arg_dict['COLUMN']),fileDict)
+    if('COLUMNNAME' in arg_dict):
+        lf.setColumnName(arg_dict['COLUMNNAME'])
+        lf.getDataFromColumn(0,fileDict)#fix
+        #add aditional calls
     return lf.generateShape()
 
 def generate_text(slide,shape,tokens,fileDict):
@@ -92,21 +71,12 @@ def generate_text(slide,shape,tokens,fileDict):
 
         arg_dict[tkn_type] = tkn_value
         
-    if('X' in arg_dict):
-        tf.setX(Inches(float(arg_dict['X'])))
-    if('Y' in arg_dict):
-        tf.setY(Inches(float(arg_dict['Y'])))
-    if('CX' in arg_dict):
-        tf.setCX(Inches(float(arg_dict['CX'])))
-    if('CY' in arg_dict):
-        tf.setCY(Inches(float(arg_dict['CY'])))
-    if 'BOOK' in arg_dict:
-    	tf.setBook(int(arg_dict['BOOK']))
+    defaultFactoryActions(tf, arg_dict, fileDict);    
     if('COLUMN' in arg_dict):
         tf.getDataFromColumn(int(arg_dict['COLUMN']),tf.getFileFromDict(fileDict))
     if('VARIABLE' in arg_dict):
         tf.computeOutputVar(arg_dict['VARIABLE'])
-    
+   
     return tf.generateShape()
 
 
@@ -148,3 +118,16 @@ def getQueryString(text):
         print 'WARNING query string not found when possibly expected'
         return ''
 
+def defaultFactoryActions(factory, arg_dict, fileDict):
+
+    if('X' in arg_dict):
+        factory.setX(Inches(float(arg_dict['X'])))
+    if('Y' in arg_dict):
+        factory.setY(Inches(float(arg_dict['Y'])))
+    if('CX' in arg_dict):
+        factory.setCX(Inches(float(arg_dict['CX'])))
+    if('CY' in arg_dict):
+        factory.setCY(Inches(float(arg_dict['CY'])))
+    if('BOOK' in arg_dict):
+    	factory.setBook(int(arg_dict['BOOK']))
+ 

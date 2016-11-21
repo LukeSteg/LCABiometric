@@ -1,8 +1,10 @@
 #!/usr/bin/python
 import datetime
 import xlrd
+import json
 
 DATA_SHEET_NUM = 25
+AGGREGATE_SHEET_NAME = "Aggregate"
 
 def most_recent_key(tup):
     return str(tup[1]) + str(tup[0])
@@ -18,21 +20,33 @@ class genericFactory(object):
         self.cy = shapeRef.height
         self.relBook = 0
         
-    def setBook(self, yr):
-        self.relYear = yr
-        
     def getFileFromDict(self, fileDict):
         sortedFiles = sorted(fileDict, key = lambda x: most_recent_key(fileDict[x]), reverse = True)
+        tempDict = {}
+        for f in fileDict:
+            fileDict[f]
+            most_recent_key(fileDict[f])
+            tempDict[most_recent_key(fileDict[f])] = f    
+        
+        #sortedFiles = sorted(tempDict)
+        print 'relbk ',self.relBook
+        print 'stdf', sortedFiles
         return sortedFiles[self.relBook]      
 
     def generateShape(self):
         print "generic generate shape invoked" 
 
+    def getAggregateSheetFromBook(self, book):
+        sheetName
+   
+    def setBook(self, bookNumber):
+        self.relBook = bookNumber 
+
     def setColumn(self,colText):
         self.columnNum = colText
-
-    def setText(self, textRef):
-        self.contentText = textRef
+        
+    def setColumnName(self, colName):
+        self.columnName = colName
 
     def setShape(self, shapeRef):
         self.shapeRef =  shapeRef
@@ -48,4 +62,5 @@ class genericFactory(object):
 
     def setCY(self, CY):
         self.CY = CY
-                                                                                             
+
+                                                                                            
