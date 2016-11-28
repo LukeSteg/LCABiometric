@@ -21,6 +21,8 @@ class pieChartFactory(genericChartFactory):
         data_labels = chart.plots[0].data_labels
         data_labels.number_format = '0%'
         data_labels.position = XL_LABEL_POSITION.OUTSIDE_END
+        
+        chart.Chart.chartTitle.Text = self.titeText
 
 
 
