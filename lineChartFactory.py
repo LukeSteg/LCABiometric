@@ -11,7 +11,7 @@ from pptx.enum.chart import XL_CHART_TYPE
 class lineChartFactory(genericChartFactory):
 
     def __init__(self, slideRef, shapeRef):
-        super(self.__class__, self).__init__(slideRef, shapeRef)
+        super(lineChartFactory, self).__init__(slideRef, shapeRef)
         self.numberOfBooks = 2
         self.chart_data = ChartData()
 
