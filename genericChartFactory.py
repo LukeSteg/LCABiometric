@@ -13,8 +13,15 @@ AGGREGATE_SHEET_NAME = 'Aggregate'
 
 class genericChartFactory(genericFactory):
 
+    def __init__(self, slideRef, shapeRef):
+        super(self.__class__, self).__init__(slideRef, shapeRef)
+        self.titleText = ''
+
     def setColumn(self, colText):
         self.columnNum = colText
+
+    def setTitle(self, titleText):
+        self.titleText = titleText
 
     def setData(self, dataRef):
         self.dataRef = dataRef

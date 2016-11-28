@@ -26,13 +26,6 @@ def generate_bar_chart(slide,shape,tokens,fileDict):
 
         arg_dict[tkn_type] = tkn_value
 
-#   if('CATEGORIES' in arg_dict):
-#        bf.setCategories(arg_dict['CATEGORIES'])
-#    if('SERIES NAME' in arg_dict and 'SERIES DATA' in arg_dict):
-#        bf.addSeries(arg_dict['SERIES NAME'],arg_dict['SERIES DATA'])
-#    if('HAS LEGEND' in arg_dict):
-#        bf.setCategories(bool(arg_dict['HAS LEGEND']))
-   
     defaultFactoryActions(bf, arg_dict, fileDict);    
     if('COLUMN' in arg_dict):
         bf.getDataFromColumn(int(arg_dict['COLUMN']),bf.getFileFromDict(fileDict))
@@ -48,7 +41,7 @@ def generate_line_chart(slide,shape,tokens,fileDict):
 
         arg_dict[tkn_type] = tkn_value
     
-    #MUST GO FIRST
+    #MUST GO BEFORE 'COLUMN'
     if('SURVEYCOUNT' in arg_dict):
         lf.setNumberOfBooks(int(arg_dict['SURVEYCOUNT']))
     
