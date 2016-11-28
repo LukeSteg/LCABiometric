@@ -32,17 +32,17 @@ class FileSelectionPanel(wx.Panel):
 		self.last_dir = "."
 		
 		# get template file
-		self.template_file_button = wx.Button(self, label = "Choose Template Powerpoint File")
+		self.template_file_button = wx.Button(self, label = "Choose Type of Template for Report")
 		self.Bind(wx.EVT_BUTTON, self.onTFB, self.template_file_button)
 		self.TFB_label = wx.TextCtrl(self, size=(500,-1), style = wx.TE_READONLY)
 		
 		# get output file
-		self.output_file_button = wx.Button(self, label = "Choose Output Filename")
+		self.output_file_button = wx.Button(self, label = "Please name your Powerpoint")
 		self.Bind(wx.EVT_BUTTON, self.onOFB, self.output_file_button)
 		self.OFB_label = wx.TextCtrl(self, size=(500,-1), style = wx.TE_READONLY)
 		
 		# get directory of input excel file(s)
-		self.excel_dir_button = wx.Button(self, label = "Choose Directory of Input Excel File(s)")
+		self.excel_dir_button = wx.Button(self, label = "Name of Company Folder")
 		self.Bind(wx.EVT_BUTTON, self.onEDB, self.excel_dir_button)
 		self.EDB_label = wx.TextCtrl(self, size=(500,-1), style = wx.TE_READONLY)
 		
