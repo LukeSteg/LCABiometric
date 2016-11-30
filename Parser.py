@@ -71,6 +71,8 @@ def generate_text(slide,shape,tokens,fileDict):
         arg_dict[tkn_type] = tkn_value
         
     defaultFactoryActions(tf, arg_dict, fileDict);    
+    if('COUNTORPERCENT' in arg_dict):
+        tf.setOutputVarType(arg_dict['COUNTORPERCENT'])
     if('COLUMN' in arg_dict):
         tf.setColumn(arg_dict['COLUMN'], fileDict)
         tf.getDataFromColumn(tf.getFileFromDict(fileDict))

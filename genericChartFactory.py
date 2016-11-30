@@ -44,10 +44,10 @@ class genericChartFactory(genericFactory):
             categoryCount.append(sum(dataEntry == categories[i] for dataEntry in rawData))
 
         print "categories : "
-        print categories
+        print tuple(categories)
         print "tuple(categorCount) : "
         print tuple(categoryCount)
-        self.chart_data.categories = categories
+        self.chart_data.categories = categories 
         self.chart_data.add_series('Series 1',tuple(categoryCount))
 
 

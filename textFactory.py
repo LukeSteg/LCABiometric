@@ -22,12 +22,32 @@ class textFactory(genericFactory):
         self.contentText = textRef.upper()
 
     def setOutputVarType(self, outputVarType):
-        self.outputVarType = outputVarType
+        if(outputVarType == 'PERCENT' or outputVarType == 'COUNT'):
+            self.outputVarType = outputVarType
+        else
+            print 'WARNING unexpected \'PERCENTORCOUNT\' value, expected percent or count, found ', outputVar  
 
     def computeOutputVar(self, outputVar):
         print 'output var ' + str(outputVar)
         print 'categories ' + str(self.categories)
-        if outputVar in self.categories:
+        participantCountString = '#COUNT'
+        averageValueOfCategory = '#AVERAGE'
+        #get the number of data points 
+        if(outputVar.upper() == participantCountString):
+            self.outputText = str(self.numberOfDataPoints)
+        #get the average of the floats in the data
+        if(outputVar.upper() == averageValueOfCategory):
+            values = []
+            for i in range(len(self.categories)):
+                for j in range(len(self.categoryCount)):
+                    try:
+                        floatValue = float(self.categories[i])
+                        values.append(self.categories[i])
+                    except ValueError:
+                        print 'WARNING, expected to find an int while performing average operation, found: ', self.categories[i]
+            self.outputText = str(sum(values)/len(values))
+        #get the percentage or count of a var in the data
+        elif outputVar in self.categories:
             outputVarIndex = self.categories.index(outputVar)
             outputVarCount = self.categoryCount[outputVarIndex]
 
