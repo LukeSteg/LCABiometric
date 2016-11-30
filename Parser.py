@@ -101,7 +101,8 @@ def parse(slide,shape0,shape,fileDict):
     frame = shape.text_frame
     
     text = frame.text.strip()
-    print "parsing %s" % text    
+    print "parsing %s" % text  
+    #define if while actually worked *cough* zane *cough*  
     while containsQueryString(text):
         text = getQueryString(text)
         print 'Query String ' + text
@@ -116,7 +117,7 @@ def parse(slide,shape0,shape,fileDict):
 
         switch = {'PIE CHART':generate_pie_chart , 'BAR CHART':generate_bar_chart , 'LINE CHART':generate_line_chart , 'TEXT':generate_text }
          
-        new_shape = switch[fig_type](slide,shape0,tokens,fileDict)
+        new_shape = switch[fig_type](slide,shape,tokens,fileDict)
         
         text = frame.text.strip()
 
