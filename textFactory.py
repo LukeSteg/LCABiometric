@@ -24,7 +24,7 @@ class textFactory(genericFactory):
     def setOutputVarType(self, outputVarType):
         if(outputVarType == 'PERCENT' or outputVarType == 'COUNT'):
             self.outputVarType = outputVarType
-        else
+        else:
             print 'WARNING unexpected \'PERCENTORCOUNT\' value, expected percent or count, found ', outputVar  
 
     def computeOutputVar(self, outputVar):

@@ -1,5 +1,0 @@
-('Z:\\home\\zane\\LCABiometric\\build\\demo_gui\\xlsxwriter-0.9.3-py2.7.egg',
- None,
- set(['*.py', '*.pyc', '*.pyd', '*.pyo', '*.so', 'EGG-INFO']),
- 'DATA',
- [])
