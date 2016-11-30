@@ -2,12 +2,13 @@
 
 import xlrd
 from genericFactory import genericFactory
-from genericFactory import DATA_SHEET_NUM
+from genericFactory import AGGREGATE_SHEET_NAME
+from pptx.chart.data import ChartData
 
 class textFactory(genericFactory):
 
     def __init__(self, slideRef, shapeRef):
-        super(self.__class__,self).__init__(slideRef, shapeRef)
+        super(textFactory,self).__init__(slideRef, shapeRef)
         self.outputVarType = 'percent'
         self.outputText = 'NO OUTPUT TEXT CREATED'
 
@@ -45,7 +46,7 @@ class textFactory(genericFactory):
 
     def getDataFromColumn(self, colNum, fileRef):
         book = xlrd.open_workbook(fileRef);
-        dataSheet = book.sheet_by_index(DATA_SHEET_NUM)
+        dataSheet = book.sheet_by_name(AGGREGATE_SHEET_NAME)#throw error if nothing is returned?
         self.chart_data = ChartData()
         rawData = []
         self.categories = []
