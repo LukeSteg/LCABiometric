@@ -9,6 +9,7 @@ def generate_pie_chart(slide,shape,tokens,fileDict):
     pf = pieChartFactory.pieChartFactory(slide,shape)
     arg_dict = {}
     for token in tokens:
+        print 'token = %s' % token
         tkn_type = token.split(':')[0]
         tkn_value = token.split(':')[1]
         arg_dict[tkn_type] = tkn_value
