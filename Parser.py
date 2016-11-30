@@ -14,10 +14,12 @@ def generate_pie_chart(slide,shape,tokens,fileDict):
         arg_dict[tkn_type] = tkn_value
         
     defaultFactoryActions(pf, arg_dict, fileDict);    
-    if('TITLE' in arg_dict):
-        pf.setTitle(arg_dict['TITLE'])
+#    if('TITLE' in arg_dict):
+#        pf.setTitle(arg_dict['TITLE'])
     if('COLUMN' in arg_dict):
-        pf.getDataFromColumn(int(arg_dict['COLUMN']),pf.getFileFromDict(fileDict))
+        pf.setColumn(arg_dict['COLUMN'], fileDict)
+        pf.getDataFromColumn(pf.getFileFromDict(fileDict))
+
     return pf.generateShape()
 
 def generate_bar_chart(slide,shape,tokens,fileDict):
@@ -31,7 +33,9 @@ def generate_bar_chart(slide,shape,tokens,fileDict):
 
     defaultFactoryActions(bf, arg_dict, fileDict);    
     if('COLUMN' in arg_dict):
-        bf.getDataFromColumn(int(arg_dict['COLUMN']),bf.getFileFromDict(fileDict))
+        bf.setColumn(arg_dict['COLUMN'], fileDict)
+        bf.getDataFromColumn(bf.getFileFromDict(fileDict))
+
     return bf.generateShape()
 
 def generate_line_chart(slide,shape,tokens,fileDict):
@@ -50,11 +54,9 @@ def generate_line_chart(slide,shape,tokens,fileDict):
     
     defaultFactoryActions(lf, arg_dict, fileDict);   
     if('COLUMN' in arg_dict):
-        lf.getDataFromColumn(int(arg_dict['COLUMN']),fileDict)
-    if('COLUMNNAME' in arg_dict):
-        lf.setColumnName(arg_dict['COLUMNNAME'])
-        lf.getDataFromColumn(0,fileDict)#fix
-        #add aditional calls
+        lf.setColumnName(arg_dict['COLUMN'])
+        lf.getDataFromColumn(fileDict)
+
     return lf.generateShape()
 
 def generate_text(slide,shape,tokens,fileDict):
@@ -69,7 +71,8 @@ def generate_text(slide,shape,tokens,fileDict):
         
     defaultFactoryActions(tf, arg_dict, fileDict);    
     if('COLUMN' in arg_dict):
-        tf.getDataFromColumn(int(arg_dict['COLUMN']),tf.getFileFromDict(fileDict))
+        tf.setColumn(arg_dict['COLUMN'], fileDict)
+        tf.getDataFromColumn(tf.getFileFromDict(fileDict))
     if('VARIABLE' in arg_dict):
         tf.computeOutputVar(arg_dict['VARIABLE'])
    
@@ -88,7 +91,10 @@ def generate_table_text(slide, shape, tokens, fileDict, cellRef):
     if('BOOK' in arg_dict):
     	tf.setBook(int(arg_dict['BOOK']))
     if('COLUMN' in arg_dict):
-        tf.getDataFromColumn(int(arg_dict['COLUMN']),tf.getFileFromDict(fileDict))
+        tf.setColumn(arg_dict['COLUMN'], fileDict)
+        tf.getDataFromColumn(tf.getFileFromDict(fileDict))
+    if('COLUMN' in arg_dict):
+        tf.setColumnName(arg_dict['COLUMN'], fileDict)
     if('VARIABLE' in arg_dict):
         tf.computeOutputVar(arg_dict['VARIABLE'])
    

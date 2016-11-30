@@ -9,7 +9,7 @@ class textFactory(genericFactory):
 
     def __init__(self, slideRef, shapeRef):
         super(textFactory,self).__init__(slideRef, shapeRef)
-        self.outputVarType = 'percent'
+        self.outputVarType = 'PERCENT'
         self.outputText = 'NO OUTPUT TEXT CREATED'
 
     def generateShape(self):
@@ -18,11 +18,8 @@ class textFactory(genericFactory):
         self.shapeRef.text = self.shapeRef.text[0:queryStartIndex] + self.outputText + self.shapeRef.text[queryEndIndex+1: len(self.shapeRef.text)]
         print self.shapeRef.text
 
-    def setColumn(self,colText):
-        self.columnNum = colText 
-    
     def setText(self, textRef):
-        self.contentText = textRef
+        self.contentText = textRef.upper()
 
     def setOutputVarType(self, outputVarType):
         self.outputVarType = outputVarType
@@ -34,9 +31,9 @@ class textFactory(genericFactory):
             outputVarIndex = self.categories.index(outputVar)
             outputVarCount = self.categoryCount[outputVarIndex]
 
-            if self.outputVarType == 'percent':
+            if self.outputVarType == 'PERCENT':
                 self.outputText = str(int(float(outputVarCount)/float(self.numberOfDataPoints)*100)) + '%'
-            elif self.outputVarType == 'count':
+            elif self.outputVarType == 'COUNT':
                 self.outputText = str(outputVarCount)
             else:
                 print 'ERROR self.outputVarType not expected varType'
@@ -44,7 +41,7 @@ class textFactory(genericFactory):
             print 'ERROR outputVar for text insert was not in detected in given data'
 
 
-    def getDataFromColumn(self, colNum, fileRef):
+    def getDataFromColumn(self, fileRef):
         book = xlrd.open_workbook(fileRef);
         dataSheet = book.sheet_by_name(AGGREGATE_SHEET_NAME)#throw error if nothing is returned?
         self.chart_data = ChartData()
@@ -52,6 +49,7 @@ class textFactory(genericFactory):
         self.categories = []
         self.categoryCount = []
         self.numberOfDataPoints = dataSheet.nrows;
+        colNum = self.colNum
 
         for i in range(dataSheet.nrows - 1):
             rawData.append(dataSheet.cell_value(rowx = i + 1, colx = colNum))

@@ -19,13 +19,14 @@ class genericFactory(object):
         self.cx = shapeRef.width
         self.cy = shapeRef.height
         self.relBook = 0
+        self.colNum = 0
         
     def getFileFromDict(self, fileDict):
         sortedFiles = sorted(fileDict, key = lambda x: most_recent_key(fileDict[x]), reverse = True)
         return sortedFiles[self.relBook]      
 
     def generateShape(self):
-        print "generic generate shape invoked" 
+        print "WARNING generic generate shape invoked" 
 
     def getAggregateSheetFromBook(self, book):
         sheetName
@@ -33,14 +34,29 @@ class genericFactory(object):
     def setBook(self, bookNumber):
         self.relBook = bookNumber 
 
-    def setColumn(self,colText):
-        self.columnNum = colText
+#    def setColumn(self,colNumber):
+#        self.columnNum = colNumber
         
-    def setColumnName(self, colName):
-        self.columnName = colName
+    def setColumn(self, columnName, fileDict):
+        fileRef = self.getFileFromDict(fileDict)
+        book = xlrd.open_workbook(fileRef)
+        sheet = book.sheet_by_name(AGGREGATE_SHEET_NAME)
+        columnNumber = 0
+        readColumnText = sheet.cell_value(rowx = 0, colx = columnNumber)
+        while((readColumnText.strip().upper() != columnName) and (readColumnText != '')):
+            print readColumnText
+            columnNumber += 1
+            readColumnText = sheet.cell_value(rowx = 0, colx = columnNumber)
+
+        if readColumnText == '':
+            print 'WARNING, column title: ', readColumnText,  ' not found'
+
+        print 'colnum ',columnNumber ,' readColumnText ', readColumnText
+        
+        self.colNum = columnNumber
 
     def setShape(self, shapeRef):
-        self.shapeRef =  shapeRef
+        self.shapeRef = shapeRef
 
     def setX(self, x):
         self.x = x 

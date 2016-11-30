@@ -17,9 +17,6 @@ class genericChartFactory(genericFactory):
         super(genericChartFactory, self).__init__(slideRef, shapeRef)
         self.titleText = ''
 
-    def setColumn(self, colText):
-        self.columnNum = colText
-
     def setTitle(self, titleText):
         self.titleText = titleText
 
@@ -29,13 +26,14 @@ class genericChartFactory(genericFactory):
     def setShape(self, shapeRef):
         self.shapeRef =  shapeRef
 
-    def getDataFromColumn(self, colNum, fileRef):
+    def getDataFromColumn(self, fileRef):
         book = xlrd.open_workbook(fileRef);
         dataSheet = book.sheet_by_name(AGGREGATE_SHEET_NAME)
         self.chart_data = ChartData()
         rawData = []
         categories = []
         categoryCount = []
+        colNum = self.colNum
 
         for i in range(dataSheet.nrows - 1):
             rawData.append(dataSheet.cell_value(rowx = i + 1, colx = colNum))

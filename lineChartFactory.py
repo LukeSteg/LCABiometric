@@ -14,6 +14,7 @@ class lineChartFactory(genericChartFactory):
         super(lineChartFactory, self).__init__(slideRef, shapeRef)
         self.numberOfBooks = 2
         self.chart_data = ChartData()
+        self.columnName = 'NO NAME SET'
 
     def generateShape(self):
         print 'line chart data', self.chart_data
@@ -24,6 +25,9 @@ class lineChartFactory(genericChartFactory):
     
     def setNumberOfBooks(self, books):
         self.numberOfBooks = books
+
+    def setColumnName(self, colName):
+        self.columnName = colName
 
     def getColumnNumberByName(self, columnName, sheet):
         columnNumber = 0
@@ -41,7 +45,7 @@ class lineChartFactory(genericChartFactory):
         return columnNumber
 
 
-    def getDataFromColumn(self, colNum, fileDict):
+    def getDataFromColumn(self, fileDict):
         #book = xlrd.open_workbook(fileRef);
         #dataSheet = book.sheet_by_index(AGGREGATE_SHEET_NAME)#throw error if nothing is returned?
         #self.chart_data = ChartData()
@@ -62,8 +66,6 @@ class lineChartFactory(genericChartFactory):
         dataBySheet = {}
         sheetDict = {}
         categories = []
-        seriesNames = []
-        seriesData = collections.defaultdict(list)
         #get series titles
         #sum series on a per year/seriesNames basis
         for filePath in fileReferences:
@@ -81,11 +83,13 @@ class lineChartFactory(genericChartFactory):
                 print sheetDict[filePath].cell_value(rowx = i + 1, colx = colNum)
                 dataBySheet[filePath].append(sheetDict[filePath].cell_value(rowx = i + 1, colx = colNum))
 
+        seriesNames = []
         seriesNames = list(set(allData))
         self.chart_data.categories = categories
         print "categories : "
         print categories
  
+        seriesData = collections.defaultdict(list)
         for i in range(len(seriesNames)):
             for filePath in fileReferences:
                 seriesData[seriesNames[i]].append(sum(dataEntry == seriesNames[i] for dataEntry in dataBySheet[filePath]))
