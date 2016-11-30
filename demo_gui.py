@@ -107,7 +107,7 @@ class FileSelectionPanel(wx.Panel):
 		
 	def onTFB(self, event):
 		self.TFB_pressed = True
-		answer = self.askUserForFilename(style = wx.OPEN, **self.defaultFileDialogOptions('Choose a Template Powerpoint file'))
+		answer = self.askUserForFilename(style = wx.FD_OPEN, **self.defaultFileDialogOptions('Choose a Template Powerpoint file'))
 		if answer[0]:
 			self.template_filename = answer[2]
 			self.template_dir = answer[1]
@@ -117,7 +117,7 @@ class FileSelectionPanel(wx.Panel):
 		
 	def onOFB(self, event):
 		self.OFB_pressed = True
-		answer = self.askUserForFilename(style = wx.SAVE, **self.defaultFileDialogOptions('Choose a file to write output to'))
+		answer = self.askUserForFilename(style = wx.FD_SAVE, **self.defaultFileDialogOptions('Choose a file to write output to'))
 		if answer[0]:
 			self.output_filename = answer[2]
 			self.output_dir = answer[1]
@@ -126,7 +126,7 @@ class FileSelectionPanel(wx.Panel):
 		
 	def onEDB(self, event):
 		self.EDB_pressed = True
-		answer = self.askUserForFilename(style = wx.CHANGE_DIR, **self.defaultFileDialogOptions('Choose a folder containing excel files'))
+		answer = self.askUserForFilename(style = wx.FD_CHANGE_DIR, **self.defaultFileDialogOptions('Choose a folder containing excel files'))
 		if answer[0]:
 			self.excel_dir = answer[1]
 			self.excel_dir_set = True
