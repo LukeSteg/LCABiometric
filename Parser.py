@@ -99,23 +99,25 @@ def generate_table_text(slide, shape, tokens, fileDict, cellRef):
 def parse(slide,shape0,shape,fileDict):
     frame = shape.text_frame
     
-    text = frame.text.strip();
+    text = frame.text.strip()
     print "parsing %s" % text    
-    if(containsQueryString(text)):
+    while containsQueryString(text):
         text = getQueryString(text)
         print 'Query String ' + text
-        tokens = text.split(',');
-        print type(tokens[0]);
+        tokens = text.split(',')
+        print type(tokens[0])
         tokens = map(str,tokens)
-        print type(tokens[0]);
-        tokens = map(str.strip,tokens);
-        tokens = map(str.upper,tokens);
+        print type(tokens[0])
+        tokens = map(str.strip,tokens)
+        tokens = map(str.upper,tokens)
         
         fig_type = tokens[0].split(':')[1]
 
         switch = {'PIE CHART':generate_pie_chart , 'BAR CHART':generate_bar_chart , 'LINE CHART':generate_line_chart , 'TEXT':generate_text }
          
         new_shape = switch[fig_type](slide,shape0,tokens,fileDict)
+        
+        text = frame.text.strip()
 
 def parseTable(slide, shape0, shape, fileDict):
     table = shape.table
