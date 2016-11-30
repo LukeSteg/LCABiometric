@@ -118,7 +118,7 @@ def parse(slide,shape0,shape,fileDict):
         switch = {'PIE CHART':generate_pie_chart , 'BAR CHART':generate_bar_chart , 'LINE CHART':generate_line_chart , 'TEXT':generate_text }
          
         new_shape = switch[fig_type](slide,shape,tokens,fileDict)
-        
+        #update for while loop
         text = frame.text.strip()
 
 def parseTable(slide, shape0, shape, fileDict):
@@ -129,7 +129,8 @@ def parseTable(slide, shape0, shape, fileDict):
         for c in range(len(table.columns)):
             cell = table.cell(r,c)
             cellText = cell.text_frame.text
-            if(containsQueryString(cellText)):
+            #define if while take 2
+            while(containsQueryString(cellText)):
                 text = getQueryString(cellText)
                 print 'Query String ' + text
                 tokens = text.split(',');
@@ -139,7 +140,9 @@ def parseTable(slide, shape0, shape, fileDict):
                 tokens = map(str.strip,tokens);
                 tokens = map(str.upper,tokens);
         
-                generate_table_text(slide, shape, tokens, fileDict, cell) 
+                generate_table_text(slide, shape, tokens, fileDict, cell)
+                #update for while loop that might work
+                cellText = cell.text_frame.text
 
 def containsQueryString(text):
     result = False
