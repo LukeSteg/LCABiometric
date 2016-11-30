@@ -9,6 +9,7 @@ def generate_pie_chart(slide,shape,tokens,fileDict):
     pf = pieChartFactory.pieChartFactory(slide,shape)
     arg_dict = {}
     for token in tokens:
+        print 'token = %s' % token
         tkn_type = token.split(':')[0]
         tkn_value = token.split(':')[1]
         arg_dict[tkn_type] = tkn_value
@@ -105,23 +106,26 @@ def generate_table_text(slide, shape, tokens, fileDict, cellRef):
 def parse(slide,shape0,shape,fileDict):
     frame = shape.text_frame
     
-    text = frame.text.strip();
-    print "parsing %s" % text    
-    if(containsQueryString(text)):
+    text = frame.text.strip()
+    print "parsing %s" % text  
+    #define if while actually worked *cough* zane *cough*  
+    while containsQueryString(text):
         text = getQueryString(text)
         print 'Query String ' + text
-        tokens = text.split(',');
-        print type(tokens[0]);
+        tokens = text.split(',')
+        print type(tokens[0])
         tokens = map(str,tokens)
-        print type(tokens[0]);
-        tokens = map(str.strip,tokens);
-        tokens = map(str.upper,tokens);
+        print type(tokens[0])
+        tokens = map(str.strip,tokens)
+        tokens = map(str.upper,tokens)
         
         fig_type = tokens[0].split(':')[1]
 
         switch = {'PIE CHART':generate_pie_chart , 'BAR CHART':generate_bar_chart , 'LINE CHART':generate_line_chart , 'TEXT':generate_text }
          
-        new_shape = switch[fig_type](slide,shape0,tokens,fileDict)
+        new_shape = switch[fig_type](slide,shape,tokens,fileDict)
+        #update for while loop
+        text = frame.text.strip()
 
 def parseTable(slide, shape0, shape, fileDict):
     table = shape.table
@@ -131,7 +135,8 @@ def parseTable(slide, shape0, shape, fileDict):
         for c in range(len(table.columns)):
             cell = table.cell(r,c)
             cellText = cell.text_frame.text
-            if(containsQueryString(cellText)):
+            #define if while take 2
+            while(containsQueryString(cellText)):
                 text = getQueryString(cellText)
                 print 'Query String ' + text
                 tokens = text.split(',');
@@ -141,7 +146,9 @@ def parseTable(slide, shape0, shape, fileDict):
                 tokens = map(str.strip,tokens);
                 tokens = map(str.upper,tokens);
         
-                generate_table_text(slide, shape, tokens, fileDict, cell) 
+                generate_table_text(slide, shape, tokens, fileDict, cell)
+                #update for while loop that might work
+                cellText = cell.text_frame.text
 
 def containsQueryString(text):
     result = False
