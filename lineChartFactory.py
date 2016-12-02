@@ -7,6 +7,7 @@ from genericFactory import AGGREGATE_SHEET_NAME
 from pptx import Presentation
 from pptx.chart.data import ChartData
 from pptx.enum.chart import XL_CHART_TYPE
+from pptx.util import Pt
 
 class lineChartFactory(genericChartFactory):
 
@@ -22,6 +23,9 @@ class lineChartFactory(genericChartFactory):
         self.shapeRef.text = ''
         chart.has_legend = True
         chart.legend.include_in_layout = False
+
+        print 'width ' + str(self.cx.inches)
+        print 'height ' + str(self.cy.inches)
     
     def setNumberOfBooks(self, books):
         self.numberOfBooks = books

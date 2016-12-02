@@ -2,6 +2,7 @@
 import datetime
 import xlrd
 import json
+from pptx.util import Inches
 
 DATA_SHEET_NUM = 25
 AGGREGATE_SHEET_NAME = "Aggregate"
@@ -47,7 +48,7 @@ class genericFactory(object):
         columnNumber = 0
         readColumnText = sheet.cell_value(rowx = 0, colx = columnNumber)
         while((readColumnText.strip().upper() != columnName) and (readColumnText != '')):
-            print readColumnText
+            print readColumnText.strip().upper() + ' ; ' + str(columnName)
             columnNumber += 1
             readColumnText = sheet.cell_value(rowx = 0, colx = columnNumber)
 
@@ -62,15 +63,15 @@ class genericFactory(object):
         self.shapeRef = shapeRef
 
     def setX(self, x):
-        self.x = x 
+        self.x = Inches(float(x))
 
     def setY(self, y):
-        self.y = y 
+        self.y = Inches(float(y)) 
 
     def setCX(self, cx):
-        self.cx = cx 
+        self.cx = Inches(float(cx)) 
 
-    def setCY(self, CY):
-        self.CY = CY
+    def setCY(self, cy):
+        self.cy = Inches(float(cy))
 
                                                                                             

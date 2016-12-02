@@ -4,6 +4,7 @@ import xlrd
 from genericFactory import genericFactory
 from genericFactory import AGGREGATE_SHEET_NAME
 from pptx.chart.data import ChartData
+from pptx.util import Pt
 
 class textFactory(genericFactory):
 
@@ -11,20 +12,30 @@ class textFactory(genericFactory):
         super(textFactory,self).__init__(slideRef, shapeRef)
         self.outputVarType = 'PERCENT'
         self.outputText = 'NO OUTPUT TEXT CREATED'
+        self.textSize = -1
 
     def generateShape(self):
         queryStartIndex = self.shapeRef.text.index('#{')
         queryEndIndex = self.shapeRef.text.index('}')
         self.shapeRef.text = self.shapeRef.text[0:queryStartIndex] + self.outputText + self.shapeRef.text[queryEndIndex+1: len(self.shapeRef.text)]
+
+        if(self.textSize != -1):
+            for paragraph in self.shapeRef.paragraphs:
+                for run in paragraph.runs:
+                    run.font = Pt(self.textSize)
+
         print self.shapeRef.text
 
     def setText(self, textRef):
         self.contentText = textRef.upper()
 
+    def setTextSize(self, size):
+        self.textSize = size
+
     def setOutputVarType(self, outputVarType):
         if(outputVarType == 'PERCENT' or outputVarType == 'COUNT'):
             self.outputVarType = outputVarType
-        else
+        else:
             print 'WARNING unexpected \'PERCENTORCOUNT\' value, expected percent or count, found ', outputVar  
 
     def computeOutputVar(self, outputVar):
@@ -32,9 +43,11 @@ class textFactory(genericFactory):
         print 'categories ' + str(self.categories)
         participantCountString = '#COUNT'
         averageValueOfCategory = '#AVERAGE'
+
         #get the number of data points 
         if(outputVar.upper() == participantCountString):
             self.outputText = str(self.numberOfDataPoints)
+
         #get the average of the floats in the data
         if(outputVar.upper() == averageValueOfCategory):
             values = []
@@ -43,9 +56,10 @@ class textFactory(genericFactory):
                     try:
                         floatValue = float(self.categories[i])
                         values.append(self.categories[i])
-                    except ValueError:
+                    except (TypeError, ValueError):
                         print 'WARNING, expected to find an int while performing average operation, found: ', self.categories[i]
             self.outputText = str(sum(values)/len(values))
+
         #get the percentage or count of a var in the data
         elif outputVar in self.categories:
             outputVarIndex = self.categories.index(outputVar)

@@ -5,15 +5,19 @@ import textFactory
 import lineChartFactory
 import tableTextFactory
 
-def generate_pie_chart(slide,shape,tokens,fileDict):
-    pf = pieChartFactory.pieChartFactory(slide,shape)
+def get_arg_dict(tokens):
     arg_dict = {}
     for token in tokens:
-        print 'token = %s' % token
-        tkn_type = token.split(':')[0]
-        tkn_value = token.split(':')[1]
+        tkn_type = token.split(':')[0].strip().upper()
+        tkn_value = token.split(':')[1].strip().upper()
         arg_dict[tkn_type] = tkn_value
-        
+    return arg_dict
+
+def generate_pie_chart(slide,shape,tokens,fileDict):
+    pf = pieChartFactory.pieChartFactory(slide,shape)
+    
+    arg_dict = get_arg_dict(tokens)
+
     defaultFactoryActions(pf, arg_dict, fileDict);    
 #    if('TITLE' in arg_dict):
 #        pf.setTitle(arg_dict['TITLE'])
@@ -25,12 +29,8 @@ def generate_pie_chart(slide,shape,tokens,fileDict):
 
 def generate_bar_chart(slide,shape,tokens,fileDict):
     bf = barChartFactory.barChartFactory(slide,shape)
-    arg_dict = {}
-    for token in tokens:
-        tkn_type = token.split(':')[0]
-        tkn_value = token.split(':')[1]
-
-        arg_dict[tkn_type] = tkn_value
+    
+    arg_dict = get_arg_dict(tokens)
 
     defaultFactoryActions(bf, arg_dict, fileDict);    
     if('COLUMN' in arg_dict):
@@ -42,13 +42,8 @@ def generate_bar_chart(slide,shape,tokens,fileDict):
 def generate_line_chart(slide,shape,tokens,fileDict):
     lf = lineChartFactory.lineChartFactory(slide,shape)
 
-    arg_dict = {}
-    for token in tokens:
-        tkn_type = token.split(':')[0]
-        tkn_value = token.split(':')[1]
+    arg_dict = get_arg_dict(tokens)
 
-        arg_dict[tkn_type] = tkn_value
-    
     #MUST GO BEFORE 'COLUMN'
     if('SURVEYCOUNT' in arg_dict):
         lf.setNumberOfBooks(int(arg_dict['SURVEYCOUNT']))
@@ -63,12 +58,7 @@ def generate_line_chart(slide,shape,tokens,fileDict):
 def generate_text(slide,shape,tokens,fileDict):
     tf = textFactory.textFactory(slide,shape)
 
-    arg_dict = {}
-    for token in tokens:
-        tkn_type = token.split(':')[0]
-        tkn_value = token.split(':')[1]
-
-        arg_dict[tkn_type] = tkn_value
+    arg_dict = get_arg_dict(tokens)
         
     defaultFactoryActions(tf, arg_dict, fileDict);    
     if('COUNTORPERCENT' in arg_dict):
@@ -78,28 +68,25 @@ def generate_text(slide,shape,tokens,fileDict):
         tf.getDataFromColumn(tf.getFileFromDict(fileDict))
     if('VARIABLE' in arg_dict):
         tf.computeOutputVar(arg_dict['VARIABLE'])
+    if('FONT' in arg_dict):
+        tf.setTextSize(int(arg_dict['FONT']))
    
     return tf.generateShape()
 
 def generate_table_text(slide, shape, tokens, fileDict, cellRef):
     tf = tableTextFactory.tableTextFactory(slide, shape, cellRef)
 
-    arg_dict = {}
-    for token in tokens:
-        tkn_type = token.split(':')[0]
-        tkn_value = token.split(':')[1]
-
-        arg_dict[tkn_type] = tkn_value
+    arg_dict = get_arg_dict(tokens)
 
     if('BOOK' in arg_dict):
     	tf.setBook(int(arg_dict['BOOK']))
     if('COLUMN' in arg_dict):
         tf.setColumn(arg_dict['COLUMN'], fileDict)
         tf.getDataFromColumn(tf.getFileFromDict(fileDict))
-    if('COLUMN' in arg_dict):
-        tf.setColumnName(arg_dict['COLUMN'], fileDict)
     if('VARIABLE' in arg_dict):
         tf.computeOutputVar(arg_dict['VARIABLE'])
+    if('FONT' in arg_dict):
+        tf.setTextSize(int(arg_dict['FONT']))
    
     return tf.generateShape()
 
@@ -172,13 +159,13 @@ def getQueryString(text):
 def defaultFactoryActions(factory, arg_dict, fileDict):
 
     if('X' in arg_dict):
-        factory.setX(Inches(float(arg_dict['X'])))
+        factory.setX(arg_dict['X'])
     if('Y' in arg_dict):
-        factory.setY(Inches(float(arg_dict['Y'])))
+        factory.setY(arg_dict['Y'])
     if('CX' in arg_dict):
-        factory.setCX(Inches(float(arg_dict['CX'])))
+        factory.setCX(arg_dict['CX'])
     if('CY' in arg_dict):
-        factory.setCY(Inches(float(arg_dict['CY'])))
+        factory.setCY(arg_dict['CY'])
     if('BOOK' in arg_dict):
     	factory.setBook(int(arg_dict['BOOK']))
  
