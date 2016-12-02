@@ -95,7 +95,7 @@ def generate_table_text(slide, shape, tokens, fileDict, cellRef):
 def parse(slide,shape0,shape,fileDict):
     frame = shape.text_frame
     
-    text = frame.text.strip()
+    text = frame.text.strip().encode('utf8')
     print "parsing %s" % text  
     #define if while actually worked *cough* zane *cough*  
     while containsQueryString(text):
