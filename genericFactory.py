@@ -18,10 +18,10 @@ class genericFactory(object):
     def __init__ (self, slideRef, shapeRef):
         self.shapeRef = shapeRef
         self.slideRef = slideRef
-        self.x = Inches(shapeRef.top)
-        self.y = Inches(shapeRef.left)
-        self.cx = Inches(shapeRef.width)
-        self.cy = Inches(shapeRef.height)
+        self.x = (shapeRef.top.inches)
+        self.y = (shapeRef.left.inches)
+        self.cx = (shapeRef.width.inches)
+        self.cy = (shapeRef.height.inches)
         self.relBook = 0
         self.colNum = 0
         
