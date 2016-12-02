@@ -2,7 +2,7 @@
 import datetime
 import xlrd
 import json
-from pptx.util import Inches
+from pptx.util import Inches, Pt
 
 DATA_SHEET_NUM = 25
 AGGREGATE_SHEET_NAME = "Aggregate"
@@ -20,8 +20,8 @@ class genericFactory(object):
         self.slideRef = slideRef
         self.x = (shapeRef.top.inches)
         self.y = (shapeRef.left.inches)
-        self.cx = (shapeRef.width.inches)
-        self.cy = (shapeRef.height.inches)
+        self.cx = Inches(4)
+        self.cy = Inches(4)
         self.relBook = 0
         self.colNum = 0
         
