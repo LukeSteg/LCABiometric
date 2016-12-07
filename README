@@ -1,0 +1,16 @@
+README for LifeCare Alliance powerpoint generator
+Authors: Zane Smith, Luke Stegman, Denver Woodward
+
+
+To run this program, simply make sure you are running windows 7, ensure that your files and folders are formatted in a way
+that is consistent with the guidelines outlined in the Deployment guide, and run the included executable.
+
+The development environment for this project is also relatively simple. First, install Python 2.7 and the python libraries 
+wxPython, python-ppt and xlrd. Next just copy the files from this direcory (or get the from github at the address: 
+https://github.com/LukeSteg/LCABiometric) and develop the .py files on the IDE of your choosing. 
+Compiling the program is complicated and it is recommended that you either run the included binary as is or run the application
+through your python interpreter.  If you do wish to compile the program for windows, first move this code onto your local system.
+Next, install python and the mentioned aformentioned libraries. finally, install the DEVELOPER BRANCH (as of 12/7/16) of py_compile
+onto your local windows system. finally use py_compile to compile the whole project starting with the application entrance point 
+powerpointGenerator.py
+
