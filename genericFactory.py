@@ -47,17 +47,21 @@ class genericFactory(object):
         sheet = book.sheet_by_name(AGGREGATE_SHEET_NAME)
         columnNumber = 0
         readColumnText = sheet.cell_value(rowx = 0, colx = columnNumber)
-        while((readColumnText.strip().upper() != columnName) and (readColumnText != '')):
+        while((readColumnText.strip().upper() != columnName) and (readColumnText != '') and (columnNumber < sheet.ncols)):
             print readColumnText.strip().upper() + ' ; ' + str(columnName)
             columnNumber += 1
             readColumnText = sheet.cell_value(rowx = 0, colx = columnNumber)
 
         if readColumnText == '':
             print 'WARNING, column title: ', readColumnText,  ' not found'
+        elif columnNumber == sheet.ncols and readColumnText != columnName:
+            print 'WARNING, column title: ', readColumnText,  ' not found'
 
         print 'colnum ',columnNumber ,' readColumnText ', readColumnText
         
         self.colNum = columnNumber
+
+
 
     def setShape(self, shapeRef):
         self.shapeRef = shapeRef
