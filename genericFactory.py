@@ -20,8 +20,8 @@ class genericFactory(object):
         self.slideRef = slideRef
         self.x = (shapeRef.top.inches)
         self.y = (shapeRef.left.inches)
-        self.cx = Inches(4)
-        self.cy = Inches(4)
+        self.cx = Inches(4.0)
+        self.cy = Inches(4.0)
         self.relBook = 0
         self.colNum = 0
         
