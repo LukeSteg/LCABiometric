@@ -55,10 +55,10 @@ class textFactory(genericFactory):
                 for j in range(len(self.categoryCount)):
                     try:
                         floatValue = float(self.categories[i])
-                        values.append(self.categories[i])
+                        values.append(floatValue)
                     except (TypeError, ValueError):
                         print 'WARNING, expected to find an int while performing average operation, found: ', self.categories[i]
-            self.outputText = str(sum(values)/len(values))
+            self.outputText = str(sum(values)/float(len(values)))
 
         #get the percentage or count of a var in the data
         elif outputVar in self.categories:
